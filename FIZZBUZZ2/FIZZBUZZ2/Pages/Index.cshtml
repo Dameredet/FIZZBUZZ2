@@ -1,0 +1,42 @@
+﻿
+
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script>
+
+    $.validator.methods.range = function (value, element, param) {
+        var globalizedValue = value.replace(",", ".");
+        return this.optional(element) || (globalizedValue >= param[0] && globalizedValue <= param[1]);
+    }
+
+    $.validator.methods.number = function (value, element) {
+        return this.optional(element) || /-?(?:\d+|\d{1,3}(?:[\s\.,]\d{3})+)(?:[\.,]\d+)?$/.test(value);
+    }
+    //Date dd/MM/yyyy
+    $.validator.methods.date = function (value, element) {
+        var date = value.split("/");
+        return this.optional(element) || !/Invalid|NaN/.test(new Date(date[2], date[1], date[0]).toString());
+    }
+</script>
+
+<div class="text-center">
+
+    <form method="post">
+        <label asp-for="FizzBuzz.Liczba">Liczba:</label>
+        <input asp-for="FizzBuzz.Liczba" type="text" class="form-control" placeholder="Podaj liczbę" required />
+        <span asp-validation-for="FizzBuzz.Liczba" style="color: red;"></span><br />
+        <button type="submit">Zatwierdź</button>
+
+    </form>
+    @Model.Wynik
+
+
+</div>
+

@@ -1,0 +1,18 @@
+﻿@page
+@model FIZZBUZZ2.Pages.OstatnioSzukaneModel
+@{
+    <p>Dane zapisane w sesji</p>
+    @if (Model.FizzBuzz != null)
+    {
+        <p>
+            @Html.DisplayNameFor(model => Model.FizzBuzz.Liczba):
+          
+            @Model.FizzBuzz.Liczba
+        </p>
+        <p>
+            @Html.DisplayNameFor(model => Model.FizzBuzz.Wynik):
+            @Model.FizzBuzz.Wynik
+        </p>
+       
+    }
+}
